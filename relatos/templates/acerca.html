@@ -1,0 +1,42 @@
+<!-- relatos/templates/relatos/acerca.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ titulo }}</title>
+  <style>
+    /* Mismos estilos para coherencia */
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    .bio {
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'home' %}">Inicio</a>
+    <a href="{% url 'acerca' %}">Acerca</a>
+  </nav>
+
+  <h1>{{ titulo }}</h1>
+  <div class="bio">
+    <p><strong>Nombre:</strong> {{ nombre }}</p>
+    <p>{{ bio }}</p>
+  </div>
+</body>
+</html>
