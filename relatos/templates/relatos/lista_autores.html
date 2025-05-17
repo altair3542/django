@@ -1,0 +1,61 @@
+<!-- relatos/templates/relatos/lista_autores.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ titulo }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      margin-bottom: 8px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    a {
+      text-decoration: none;
+      color: #2c3e50;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .nav {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="{% url 'lista_autores' %}">Autores</a> |
+    <a href="{% url 'agregar_autor' %}">Agregar Autor</a> |
+    <a href="{% url 'lista_relatos' %}">Relatos</a> |
+    <a href="{% url 'agregar_relato' %}">Agregar Relato</a>
+  </nav>
+
+  <h1>{{ titulo }}</h1>
+
+  <ul>
+    {% for autor in autores %}
+      <li>
+        <strong>{{ autor.nombre }}</strong><br />
+        <small>{{ autor.email }}</small>
+      </li>
+    {% empty %}
+      <li>No hay autores registrados.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
