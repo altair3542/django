@@ -13,7 +13,9 @@ Correremos estos los siguientes comandos en powershell como administrador (inici
 
 En caso de que lance algun error: 
 
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser 
+
+y despues cerrar todas las ventanas de powershell
 
 
 una vez activado debemos correr los siguientes comandos:
