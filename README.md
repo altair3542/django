@@ -16,14 +16,22 @@ En caso de que lance algun error:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 
-una vez activado debemos correr los siguientes comandos
+una vez activado debemos correr los siguientes comandos:
+
 2. venv\Scripts\activate
+
 3. pip install django
+   
 4. pip freeze > requirements.txt
+   
 5. django-admin startproject blog_de_viajes .
+   
 6. python manage.py startapp relatos
+    
 7. python manage.py migrate
+    
 8. python manage.py runserver
+    
 9. python manage.py createsuperuser
 
 
