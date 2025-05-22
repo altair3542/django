@@ -10,7 +10,9 @@
   <ul>
     {% for relato in relatos %}
       <li>
-        <strong>{{ relato.titulo }}</strong> - {{ relato.autor.nombre }} ({{ relato.fecha }})
+        <a href="{% url 'detalle_relato' relato.id %}">
+          <strong>{{ relato.titulo }}</strong>
+        </a> - {{ relato.autor.nombre }} ({{ relato.fecha }})
         <p>{{ relato.contenido|truncatewords:20 }}</p>
       </li>
     {% empty %}

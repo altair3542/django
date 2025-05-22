@@ -1,5 +1,5 @@
 # Aqui importamos las librerias y los modelos
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Relato, Autor
 from .forms import AutorForm, RelatoForm
 
@@ -58,3 +58,7 @@ def agregar_relato(request):
 def lista_autores(request):
     autores = Autor.objects.all()
     return render(request, 'relatos/lista_autores.html', {'autores': autores, 'titulo': 'Listado de autores' })
+
+def detalle_relato(request, relato_id):
+    relato = get_object_or_404(Relato, id=relato_id)
+    return render(request, 'relatos/detalle_relato.html', {'relato': relato})
