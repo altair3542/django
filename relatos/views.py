@@ -56,7 +56,7 @@ def detalle_relato(request, relato_id):
 
 def registro_usuario(request):
     if request.method == 'POST':
-        form = RegistroUsuarioForm(request.post)
+        form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
             usuario = form.save()
             login(request,usuario)

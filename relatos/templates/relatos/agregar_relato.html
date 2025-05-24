@@ -62,14 +62,11 @@
 </head>
 <body>
   <nav class="nav">
-    <a href="{% url 'lista_autores' %}">Autores</a> |
-    <a href="{% url 'agregar_autor' %}">Agregar Autor</a> |
     <a href="{% url 'lista_relatos' %}">Relatos</a> |
     <a href="{% url 'agregar_relato' %}">Agregar Relato</a>
   </nav>
 
   <h1>{{ titulo }}</h1>
-
   <form method="POST">
     {% csrf_token %}
     {{ form.non_field_errors }}
