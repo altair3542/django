@@ -23,6 +23,12 @@
 </head>
 <body>
   <nav>
+    {% if user.is_authenticated %}
+      hola {{ user.username }} | <a href="{% url 'logout' %}">Cerrar sesion</a>
+    {% else %}
+      <a href="{% url 'login' %}">iniciar sesión</a>
+      <a href="{% url 'registro' %}">Registrarse</a>
+    {% endif %}
     <a href="{% url 'home' %}">Inicio</a>
     <a href="{% url 'acerca' %}">Acerca</a>
     <a href="{% url 'lista_relatos' %}">Relatos</a>

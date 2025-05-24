@@ -1,7 +1,10 @@
 # Aqui importamos las librerias y los modelos
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Relato, Autor
-from .forms import AutorForm, RelatoForm
+from .models import Relato
+from .forms import RelatoForm, RegistroUsuarioForm
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -31,34 +34,33 @@ def lista_relatos(request):
     }
     return render(request, 'relatos/lista_relatos.html', contexto)
 
-def agregar_autor(request):
-    # Vista para mostrar y procesar el formulario de
-    # creacion de autores.
-    if request.method == 'POST':
-        form = AutorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_autores')
-    else:
-        form = AutorForm()
-
-    return render(request, 'relatos/agregar_autor.html', {'form': form, 'titulo': 'Agregar Autor' })
-
+@login_required
 def agregar_relato(request):
     if request.method == 'POST':
         form = RelatoForm(request.POST)
         if form.is_valid():
-            form.save()
+            relato = form.save(commit=False)
+            relato.autor = request.user
+            relato.save()
             return redirect('lista_relatos')
     else:
         form = RelatoForm
 
     return render(request, 'relatos/agregar_relato.html', {'form': form, 'titulo': 'Agregar Relato'})
 
-def lista_autores(request):
-    autores = Autor.objects.all()
-    return render(request, 'relatos/lista_autores.html', {'autores': autores, 'titulo': 'Listado de autores' })
+
 
 def detalle_relato(request, relato_id):
     relato = get_object_or_404(Relato, id=relato_id)
     return render(request, 'relatos/detalle_relato.html', {'relato': relato})
+
+def registro_usuario(request):
+    if request.method == 'POST':
+        form = RegistroUsuarioForm(request.post)
+        if form.is_valid():
+            usuario = form.save()
+            login(request,usuario)
+            return redirect('lista_relatos')
+    else:
+        form = RegistroUsuarioForm()
+    return render(request, 'relatos/registro.html', {'form' : form})

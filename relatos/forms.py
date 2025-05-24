@@ -1,26 +1,11 @@
 # relatos/forms.py
 
 from django import forms
-from .models import Autor, Relato
+from .models import Relato
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
-class AutorForm(forms.ModelForm):
-    class Meta:
-        model = Autor  # Asociamos este formulario al modelo Autor
-        fields = ['nombre', 'email']  # Campos que se mostrarán en el formulario
-        labels = {
-            'nombre': 'Nombre completo',
-            'email': 'Correo electrónico',
-        }
-
-    def clean_nombre(self):
-        """
-        Validación personalizada para el campo 'nombre'.
-        Se asegura que el nombre tenga al menos 5 caracteres.
-        """
-        nombre = self.cleaned_data.get('nombre', '')  # Obtenemos el valor enviado
-        if len(nombre) < 5:
-            raise forms.ValidationError("El nombre debe tener al menos 5 caracteres.")
-        return nombre  # Si pasa la validación, retornamos el valor limpio
+  # Si pasa la validación, retornamos el valor limpio
 
 class RelatoForm(forms.ModelForm):
     class Meta:
@@ -44,3 +29,9 @@ class RelatoForm(forms.ModelForm):
         if len(titulo) < 10:
             raise forms.ValidationError("El título debe tener al menos 10 caracteres.")
         return titulo
+
+class RegistroUsuarioForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
